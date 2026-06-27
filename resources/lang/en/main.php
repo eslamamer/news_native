@@ -1,0 +1,19 @@
+<?php
+    return[
+        'home'     => 'Home',
+        'about'    => 'About Us',
+        'services' => 'Our Services',
+        'contact'  => 'Contact Us',
+        'language' => 'Language',
+        'arabic'   => 'العربية',
+        '404'      => '404 page not found',
+        'register' => 'Register',
+        'login'    => 'Login',
+        'users'    => 'Users',
+        'name'     => 'Name',
+        'age'      => 'Age',
+        'email'    => 'Email',
+        'address'  => 'Address',
+        'submit'   => 'Send'
+       
+    ];

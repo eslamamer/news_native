@@ -1,0 +1,51 @@
+<?php render('admin.layouts.header', ['title' => trans('users.create')])?>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2>{{trans('users.user')}} - {{trans('admin.create')}}</h2>
+        <a class="btn btn-info" href="{{aurl('users')}}">{{trans('users.users')}}</a>
+    </div>
+    <form action="{{aurl('/user/create')}}" method="post">
+            <input type="hidden" name="_method" value="post">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="name">{{trans('users.name')}}</label>
+                    <input id="name" type="text" name="name" value="{{old_values('name')}}" class="form-control mb-3" placeholder="{{trans('users.name')}}" />
+                </div>
+                {{ all_errors('name'); }}
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="email">{{trans('users.email')}}</label>
+                    <input id="email" type="text" name="email" class="form-control mb-3" value="{{old_values('email')}}" placeholder="{{trans('users.email')}}" />
+                </div>
+                {{ all_errors('email'); }}
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="password">{{trans('users.password')}}</label>
+                    <input id="password" type="password" name="password" class="form-control mb-3" placeholder="{{trans('users.password')}}"/>
+                </div>
+                {{ all_errors('password'); }}
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="mobile">{{trans('users.mobile')}}</label>
+                    <input id="mobile" type="text" name="mobile" value="{{old_values('mobile')}}" class="form-control mb-3" placeholder="{{trans('users.mobile')}}" />
+                </div>
+                {{ all_errors('mobile'); }}
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="user_type">{{trans('users.user_type')}}</label>
+                    <select class="form-select" name="user_type" id="user_type">
+                        <option disabled>{{trans('users.select')}}</option>
+                        <option {{old_values('user_type') == 'admin' ? 'select' : ''}} value="admin">{{trans('users.admin')}}</option>
+                        <option {{old_values('user_type') == 'user' ? 'select' : ''}} value="user">{{trans('users.user')}}</option>
+                    </select>
+                </div>
+                {{ all_errors('user_type'); }}
+            </div>
+        <input type="submit" class="btn btn-success" value="{{trans('admin.create')}}"/>
+    </form>
+</main>
+<?php render('admin.layouts.footer'); ?>

@@ -1,0 +1,31 @@
+<?php
+    if(!empty($url)){
+        $rand = rand(000, 999);
+    }
+?>
+
+<!-- زر فتح المودال -->
+<a 
+    data-bs-toggle="modal" 
+    data-bs-target="#deleteForm{{$rand}}"
+    href="#"
+>
+<i class="fa-regular fa-trash-can"></i>
+</a>
+
+<!-- المودال -->
+<div class="modal fade" id="deleteForm{{$rand}}" tabindex="-1" 
+     aria-labelledby="deleteFormLable" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <form class="form-control" method="post" action="{{$url}}">
+                <input type="hidden" name="_method" value="post">
+                <div class="alert alert danger">
+                    <h6>{{trans('admin.del_msg')}}</h6>
+                </div>
+                <button type="submit" class="btn btn-danger">{{trans('admin.delete')}}</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss = "modal" >{{trans('admin.cancel')}}</button>
+          </form>
+        </div>
+    </div>
+</div>

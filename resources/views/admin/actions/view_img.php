@@ -1,0 +1,27 @@
+<?php
+    if(!empty($image)){
+        $rand = rand(000, 999);
+    }
+?>
+
+<!-- زر فتح المودال -->
+<img 
+    data-bs-toggle="modal" 
+    data-bs-target="#ModalCenter{{$rand}}"
+    style="cursor:pointer; height:25px; width:25px" 
+    src="{{$image}}" 
+    alt="icon"
+/>
+<!-- المودال -->
+<div class="modal fade" id="ModalCenter{{$rand}}" tabindex="-1" 
+     aria-labelledby="ModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <img 
+                style="height:80%; width:100%" 
+                src="{{$image}}" 
+                alt="icon"
+            />
+        </div>
+    </div>
+</div>

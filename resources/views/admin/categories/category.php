@@ -1,0 +1,34 @@
+<?php 
+    render('admin.layouts.header', ['title' => trans('cat.categories')]);
+    $category = fetch(intval(request('id')), 'categories');
+    if(empty($category)){
+        redirect(aurl('categories'));
+    }
+?>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2>{{trans('cat.categories')}} - {{trans('cat.category'); echo " ".trans('cat.'.$category['name'])}}</h2>
+        <a class="btn btn-info" href="{{aurl('categories')}}">{{trans('cat.categories')}}</a>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="name">{{trans('cat.name')}}</label>
+                <h3>{{$category['name']}}</h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group m-2">
+                <label for="icon">{{trans('cat.icon')}}</label>
+               {{view_img(icon_url($category['icon']))}}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="description">{{trans('cat.description')}}</label>
+            <p>{{$category['description']}}</p>
+        </div>
+    </div>
+</main>
+<?php render('admin.layouts.footer'); ?>
