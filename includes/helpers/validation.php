@@ -27,14 +27,14 @@
                          $sql = "where ";
                          $feild = "";
                         if(count($table_feild) > 1 ){
-                            $exeption = isset($table_feild[2]) ? "&& id!= $table_feild[2]" : "";
+                            $exeption = isset($table_feild[2]) ? "and id!= $table_feild[2]" : "";
                             $feild    = isset($table_feild[1]) ? $table_feild[1] : $attr ;
                             $sql      .= $feild ." = '{$values[$feild]}' ".$exeption;
                          }else{
                              $sql .= $attr ."= '{$values[$attr]}'";
                         }     
                         $user = search($table , $sql)['query'];
-                        if(!is_null(mysqli_fetch_assoc($user))){
+                        if(mysqli_num_rows($user) > 0){
                             $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.exist'));
                         }
                     }
