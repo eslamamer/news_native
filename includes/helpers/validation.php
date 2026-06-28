@@ -22,13 +22,16 @@
                         $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.image'));
                     }elseif(preg_match('/^unique/i', $rule)){
                         $table_ex = explode(':', $rule);
-                        $table_feild = explode(',', $table_ex[1]);
+                        $table_feild = count($table_ex) > 1 ? explode(',', $table_ex[1]) : "";
                         $table = $table_feild[0];
-                        if(count($table_feild) > 1 && isset($table_feild[1])){
-                            $feild = $table_feild[1];
-                             $sql = "where $table_feild[1] = '{$values[$feild]}'";
+                         $sql = "where ";
+                         $feild = "";
+                        if(count($table_feild) > 1 ){
+                            $exeption = isset($table_feild[2]) ? "&& id!= $table_feild[2]" : "";
+                            $feild    = isset($table_feild[1]) ? $table_feild[1] : $attr ;
+                            $sql      .= $feild ." = '{$values[$feild]}' ".$exeption;
                          }else{
-                             $sql = "where $attr = '{$values[$attr]}'";
+                             $sql .= $attr ."= '{$values[$attr]}'";
                         }     
                         $user = search($table , $sql)['query'];
                         if(!is_null(mysqli_fetch_assoc($user))){

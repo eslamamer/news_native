@@ -3,9 +3,9 @@ $id= request('id');
 $data = validate(
             [
                 'name'     => 'require|string',
-                'email'    => 'require|email|unique:users,email,'.$id ,
+                'email'    => 'email|unique:users,email,'.$id ,
                 'password' => 'password',
-                'mobile'   => 'require|mobile|unique:users,'.$id,
+                'mobile'   => 'mobile|unique:users,mobile,'.$id,
                 'user_type'=> 'require|string',
             ],
             [
@@ -22,6 +22,14 @@ if(empty($data['password'])){
 }else{
     $data['password'] = encrypt($data['password']);
 }
+if(empty($data['email'])){
+    unset($data['email']);
+}
+if(empty($data['mobile'])){
+    unset($data['mobile']);
+}
 update($id, 'users', $data);
 redirect(aurl('users'));
+
+
 
