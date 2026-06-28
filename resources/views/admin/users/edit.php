@@ -36,7 +36,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="mobile">{{trans('users.mobile')}}</label>
-                    <input id="mobile" type="mobile" name="mobile" value="{{$users['mobile']}}" class="form-control mb-3" placeholder="{{trans('users.mobile')}}" />
+                    <input id="mobile" type="tel" name="mobile" value="{{$users['mobile']}}" class="form-control mb-3" placeholder="{{trans('users.mobile')}}" />
                 </div>
                 {{ all_errors('mobile'); }}
             </div>
@@ -44,8 +44,8 @@
                 <div class="form-group">
                     <label for="user_type">{{trans('users.user_type')}}</label>
                     <select class="form-select" name="user_type" id="user_type">
-                        <option value="admin"{{$users['user_type'] == 'admin'? 'select' : ''}} value="admin">{{trans('users.admin')}}</option>
-                        <option value="user" {{$users['user_type'] == 'user' ? 'select' : ''}} value="user">{{trans('users.user')}}</option>
+                        <option value="admin"{{$users['user_type'] == 'admin'? 'selected' : ''}} value="admin">{{trans('users.admin')}}</option>
+                        <option value="user" {{$users['user_type'] == 'user' ? 'selected' : ''}} value="user">{{trans('users.user')}}</option>
                     </select>
                 </div>
                 {{ all_errors('user_type'); }}

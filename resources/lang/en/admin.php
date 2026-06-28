@@ -11,6 +11,7 @@ return [
     'create'    => 'Create',
     'actions'   => 'Actions',
     'edit'      => 'Edit',
+    'update'      => 'Update',
     'delete'    => 'Delete',
     'cancel'    => 'Cancel',
     'del_msg'   => 'You are about delete item, Are you sure ?',

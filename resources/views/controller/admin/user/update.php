@@ -6,7 +6,7 @@ $data = validate(
                 'email'    => 'email|unique:users,email,'.$id ,
                 'password' => 'password',
                 'mobile'   => 'mobile|unique:users,mobile,'.$id,
-                'user_type'=> 'require|string',
+                'user_type'=> 'require|string|in:admin,user',
             ],
             [
                 'name'     => trans('users.name'  ),
@@ -29,6 +29,7 @@ if(empty($data['mobile'])){
     unset($data['mobile']);
 }
 update($id, 'users', $data);
+remove_session('old');
 redirect(aurl('users'));
 
 

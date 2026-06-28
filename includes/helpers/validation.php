@@ -20,6 +20,14 @@
                         $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.string'));
                     }else if ($rule === 'image' && (!empty($value['tmp_name']) && getimagesize($value['tmp_name']) === false)) {
                         $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.image'));
+                    }elseif(preg_match('/^in/i', $rule)){
+                        $ex_rul = explode(':', $rule);
+                        if(isset($ex_rul[1])){
+                            $in = explode(',',$ex_rul[1]);
+                            if(is_array($in) && !empty($in) && !in_array($value, $in)){
+                                $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.user_type'));
+                            }
+                        }
                     }elseif(preg_match('/^unique/i', $rule)){
                         $table_ex = explode(':', $rule);
                         $table_feild = count($table_ex) > 1 ? explode(',', $table_ex[1]) : "";

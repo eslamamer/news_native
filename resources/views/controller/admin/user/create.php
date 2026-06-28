@@ -5,7 +5,7 @@
                 'email'    => 'require|email|unique:users,email',
                 'password' => 'require|password',
                 'mobile'   => 'require|mobile|unique:users',
-                'user_type'=> 'require|string',
+                'user_type'=> 'require|string|in:admin,user',
             ],
             [
                 'name'     => trans('users.name'  ),
@@ -19,4 +19,5 @@
 $data['password'] = encrypt($data['password']);
 
 adding('users', $data);
+remove_session('old');
 redirect(aurl('users'));

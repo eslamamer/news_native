@@ -15,6 +15,5 @@
 $file = rename_file($data['icon']['name']);
 $path = upload_file($data['icon'], '/categories/'.$file);
 $data['icon'] = $path;
-var_dump($data);
 adding('categories', $data);
 redirect(aurl('categories'));

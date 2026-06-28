@@ -7,5 +7,5 @@
         'password'=> ':attr is Invalid',
         'image'   => ':attr shoud be image file',
         'exist'   => ':attr is exist',
-
+        'user_type' => ':attr input not allawed',
     ];
