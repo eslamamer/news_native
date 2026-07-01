@@ -1,0 +1,27 @@
+<?php
+ //echo 'welcom to cli'.PHP_EOL;
+//  if(!defined("STDIN")){
+   //  define("STDIN", fopen("php://stdin", 'r'));
+//  }
+// $command = fgets(STDIN);
+// $command = readline();
+
+// $out = 'out put is : '.$command;
+// fwrite(STDOUT, $out);
+//////////////////////////////////////////////////////
+ //var_dump($_SERVER['argv']);
+if(php_sapi_name() == 'cli'){
+   if($argv [1] == 'view:clear'){
+      $path  = 'storage/views';
+      $files = glob($path.'/*');
+      foreach($files as $file){
+         if(file_exists($file)){
+            unlink($file);
+         }
+      }
+      echo 'all view files deleted'.PHP_EOL;
+   }
+}
+
+
+

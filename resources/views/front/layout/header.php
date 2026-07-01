@@ -13,27 +13,27 @@
     <meta charset="UTF-8">
     <?php if(session('lang') == 'en') : ?>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-        <link href="<?= url('assets/front/dist/css')?>/blog.css" rel="stylesheet" />
-        <link href="<?= url('assets/front/dist/css')?>/bootstrap.min.css" rel="stylesheet" />
+        <link href="{{url('assets/front/dist/css')}}/blog.css" rel="stylesheet" />
+        <link href="{{url('assets/front/dist/css')}}/bootstrap.min.css" rel="stylesheet" />
     <?php else: ?>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.rtl.min.css">
-        <link href="<?= url('assets/front/dist/css')?>/blog.rtl.css" rel="stylesheet" />
-        <link href="<?= url('assets/front/dist/css')?>/bootstrap.rtl.min.css" rel="stylesheet" />
+        <link href="{{url('assets/front/dist/css')}}/blog.rtl.css" rel="stylesheet" />
+        <link href="{{url('assets/front/dist/css')}}/bootstrap.rtl.min.css" rel="stylesheet" />
     <?php endif; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= trans('main.sitname')?> - <?=  isset($title) && !empty($title) ? $title : ""?></title>
+    <title>{{trans('main.sitname')}} - {{ isset($title) && !empty($title) ? $title : ""}}</title>
     <link
       rel="canonical"
       href="https://getbootstrap.com/docs/5.3/examples/blog/"
     />
-    <script src="<?= url('assets/front/js')?>/color-modes.js"></script>
+    <script src="{{url('assets/front/js')}}/color-modes.js"></script>
     <meta name="theme-color" content="#712cf9" />
     <link
       href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900&display=swap"
       rel="stylesheet"
     />
-    <link href="<?= url('assets/front/css')?>/style.css" rel="stylesheet" />
+    <link href="{{url('assets/front/css')}}/style.css" rel="stylesheet" />
 
   </head>
   <body>
-<?= render('front.layout.navbar')?>
+{{render('front.layout.navbar')}}

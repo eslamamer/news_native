@@ -165,11 +165,11 @@
       </header>
       <div class="nav-scroller py-1 mb-3 border-bottom">
         <nav class="nav nav-underline justify-content-between">
-          <a class="nav-item nav-link link-body-emphasis <?= empty(request('id')) ? 'active' : ''?>" href="/"><?= trans('main.home')?></a>
+          <a class="nav-item nav-link link-body-emphasis {{empty(request('id')) ? 'active' : ''}}" href="/">{{trans('main.home')}}</a>
           <?php $cats = search('categories', 'order by id limit 5')['query']; 
                 while($cat = mysqli_fetch_assoc($cats)):
           ?>
-              <a class="nav-item nav-link link-body-emphasis <?= !empty(request('id')) && request('id') == $cat['id'] ? 'active' : ''?>" href="<?= 'category?id='.$cat['id']?>"><?= trans('cat.'.$cat['name'])?></a>
+              <a class="nav-item nav-link link-body-emphasis {{!empty(request('id')) && request('id') == $cat['id'] ? 'active' : ''}}" href="{{'category?id='.$cat['id']}}">{{trans('cat.'.$cat['name'])}}</a>
           <?php endwhile ?>
         </nav>
       </div>

@@ -14,6 +14,7 @@
         'age'      => 'Age',
         'email'    => 'Email',
         'address'  => 'Address',
-        'submit'   => 'Send'
+        'submit'   => 'Send',
+        'sitname'  => 'news',
        
     ];

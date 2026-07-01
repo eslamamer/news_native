@@ -9,6 +9,8 @@
     session_save_path(config('session.session_save_path'));
     ini_set('session.gc_probability', 1);
     session_start(["cookie_lifetime" => config('session.expiration_time')]);
+    
+    has_session('lang') ? session('lang') : session('lang', 'ar');
 
     require_once __DIR__."/../routes/web.php"; 
     require_once __DIR__."/../includes/exeption_error.php";

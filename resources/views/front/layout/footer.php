@@ -8,7 +8,7 @@
       <p class="mb-0"><a href="#">Back to top</a></p>
     </footer>
     <script<?php url('front/dist/js') ?>
-      src="<?= url('assets/front/dist/js')?>/bootstrap.bundle.min.js"
+      src="{{url('assets/front/dist/js')}}/bootstrap.bundle.min.js"
       class="astro-vvvwv3sm"
     ></script>
   </body>

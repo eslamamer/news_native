@@ -420,4 +420,4 @@
     </div>
   </div>
 </div>
-<?= render('front.layout.footer')?>
+{{render('front.layout.footer')}}

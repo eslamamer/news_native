@@ -9,5 +9,10 @@ return [
     'category'    => 'Category',
     'show'        => 'Show',
     'sport'       => 'Sport',
-    'select'      => 'ٍSelect'
+    'select'      => 'ٍSelect',
+    'food'        => 'Food',
+    'art'         => 'Art',
+    'history'     => 'History',
+    'economic'    => 'Economic',
+    'polotic'     => 'Polotic',
 ];

@@ -1,6 +1,4 @@
-<?php $cat = fetch(request('id'), 'categories');
-    render('front.layout.header', ['title' => trans('cat.'.$cat['name'])]);
-?>
+{{render('front.layout.header')}}
 <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
   <div class="col-lg-6 px-0">
     <h1 class="display-4 fst-italic">
@@ -420,4 +418,4 @@
     </div>
   </div>
 </div>
-<?= render('front.layout.footer')?>
+{{render('front.layout.footer')}}
