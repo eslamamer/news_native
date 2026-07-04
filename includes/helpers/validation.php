@@ -37,7 +37,7 @@
                         if(count($table_feild) > 1 ){
                             $exeption = isset($table_feild[2]) ? "and id!= $table_feild[2]" : "";
                             $feild    = isset($table_feild[1]) ? $table_feild[1] : $attr ;
-                            $sql      .= $feild ." = '{$values[$feild]}' ".$exeption;
+                            $sql     .= $feild ." = '{$values[$feild]}' ".$exeption;
                          }else{
                              $sql .= $attr ."= '{$values[$attr]}'";
                         }     

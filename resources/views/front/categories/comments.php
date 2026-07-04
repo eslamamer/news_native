@@ -3,15 +3,18 @@
         <!-- New Comment Form -->
         <form id="comment-form" action="{{url('comment/add?id='.request('id'))}}" method="post">
             <div class="mb-4">
-                <input type="hidden" type="_method" value="post">
+                <input type="hidden" name="_method" value="post">
                 <div class="d-flex gap-3">
                     <img src="https://placehold.co/120/png" alt="User Avatar" class="user-avatar">
                     <div class="flex-grow-1">
                         <div class="d-flex flex-row align-items-center mb-3 p-1 form-color">
                             <input class="col-md-6 me-1" type="text" name="name" placeholder="{{ trans('main.name') }}"/>
+                            {{all_errors('name');}}
                             <input class="col-md-6" type="text" name="email" placeholder="{{ trans('main.email') }}">
+                            {{all_errors('email');}}
                         </div>
                         <textarea class="form-control comment-input" name="comment" rows="3" placeholder="{{ trans('main.write_comment') }}"></textarea>
+                        {{all_errors('comment');}}
                         <div class="mt-3 text-end">
                             <button type="submit" class="btn btn-success add-comment text-white">{{ trans('main.submit') }}</button>
                         </div>

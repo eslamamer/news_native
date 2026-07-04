@@ -16,5 +16,6 @@
         'address'        => 'Address',
         'submit'         => 'Send',
         'sitname'        => 'news',
+        'comment'        => 'Comment',
         'write_comment'  => 'write your comment',
     ];
