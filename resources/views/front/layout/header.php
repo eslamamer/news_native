@@ -26,6 +26,7 @@
       rel="canonical"
       href="https://getbootstrap.com/docs/5.3/examples/blog/"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <script src="{{url('assets/front/js')}}/color-modes.js"></script>
     <meta name="theme-color" content="#712cf9" />
     <link

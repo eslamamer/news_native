@@ -9,7 +9,6 @@
         'edit'       => 'Edit User',
         'delete'     => 'Delete User',
         'select'     => 'Select',
-        
         'name'       => 'Name',
         'email'      => 'Email',
         'password'   => 'Password',

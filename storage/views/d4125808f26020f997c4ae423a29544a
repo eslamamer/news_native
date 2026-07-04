@@ -169,7 +169,7 @@
           <?php $cats = search('categories', 'order by id limit 5')['query']; 
                 while($cat = mysqli_fetch_assoc($cats)):
           ?>
-              <a class="nav-item nav-link link-body-emphasis <?= !empty(request('id')) && request('id') == $cat['id'] ? 'active' : ''?>" href="<?= 'category?id='.$cat['id']?>"><?= trans('cat.'.$cat['name'])?></a>
+              <a class="nav-item nav-link link-body-emphasis <?= !empty(request('cat_id')) && request('cat_id') == $cat['id'] ? 'active' : ''?>" href="<?= 'category?cat_id='.$cat['id']?>"><?= trans('cat.'.$cat['name'])?></a>
           <?php endwhile ?>
         </nav>
       </div>

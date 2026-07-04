@@ -7,10 +7,10 @@
 <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
   <div class="col-lg-6 px-0">
     <h1 class="display-4 fst-italic">
-      <?= $cat['name']?>
+      {{$cat['name']}}
     </h1>
     <p class="lead my-3">
-     <?= $cat['description']?>
+     {{$cat['description']}}
     </p>
     <p class="lead mb-0">
       <a href="#" class="text-body-emphasis fw-bold">Continue reading...</a>
@@ -28,13 +28,13 @@
       class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
       <div class="col p-4 d-flex flex-column position-static">
         <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
-        <h3 class="mb-0"><?= $news['title']?></h3>
-        <div class="mb-1 text-body-secondary"><?= $news['updated_at']?></div>
-        <p class="card-text mb-auto"><?= $news['description']?></p>
+        <h3 class="mb-0">{{$news['title']}}</h3>
+        <div class="mb-1 text-body-secondary">{{$news['updated_at']}}</div>
+        <p class="card-text mb-auto">{{$news['description']}}</p>
         <a
-          href="<?= url('news?cat_id='.request('id').'&&id='.$news['id'])?>"
+          href="{{url('news?cat_id='.request('id').'&&id='.$news['id'])}}"
           class="icon-link gap-1 icon-link-hover stretched-link">
-          <?= trans('news.more')?>
+          {{trans('news.more')}}
           <svg class="bi" aria-hidden="true">
             <use xlink:href="#chevron-right"></use>
           </svg>
@@ -51,7 +51,7 @@
             $img = url('/assets/images/icon.png');
           }
         ?>
-        <img style="width:200px; height:100%;" src="<?= $img?>" alt="icon">
+        <img style="width:200px; height:100%;" src="{{$img}}" alt="icon">
         <!-- <svg
           aria-label="Placeholder: Thumbnail"
           class="bd-placeholder-img"
@@ -70,4 +70,4 @@
   <?php endwhile ?>
 </div>
 
-<?= render('front.layout.footer')?>
+{{render('front.layout.footer')}}

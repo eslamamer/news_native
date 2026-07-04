@@ -22,11 +22,11 @@
 <div class="col-mb-2">
   <div class="col-md-12">
     <article class="blog-post">
-      <h2 class="display-5 link-body-emphasis mb-1"><?= $news['title']?></h2>
+      <h2 class="display-5 link-body-emphasis mb-1">{{$news['title']}}</h2>
       <p class="blog-post-meta">
-          <?= $news['updated_at']?>
-        <a href="<?= url('users/user?id='.$news['userid'])?>">
-          <?= $news['auther']?>
+          {{$news['updated_at']}}
+        <a href="{{url('users/user?id='.$news['userid'])}}">
+          {{$news['auther']}}
         </a>
       </p> 
       <div class="col-auto d-none d-lg-block">
@@ -39,14 +39,14 @@
             $img = url('/assets/images/icon.png');
           }
         ?>
-        <img style="width:200px; height:100%;" src="<?= $img?>" alt="icon">
+        <img style="width:200px; height:100%;" src="{{$img}}" alt="icon">
       </div>
-      <p><?= $news['content']?></p>   
+      <p>{{$news['content']}}</p>   
     </article>
   </div>
   <hr>
   <div class="col-md-12">
-      <?= render('front.categories.comments')?>
+      {{render('front.categories.comments')}}
   </div>
 </div>
-<?= render('front.layout.footer')?>
+{{render('front.layout.footer')}}

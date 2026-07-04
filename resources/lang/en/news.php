@@ -10,6 +10,7 @@
         'id'          => 'ID',
         'content'     => 'Content',
         'show'        => 'Show',
+        'more'       => 'Continue reading ',
         'sport'       => 'Sport',
         'updated_at'  => 'Updated At',
         'created_at'  => 'Created At'

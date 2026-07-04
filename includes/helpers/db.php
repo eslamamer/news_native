@@ -36,7 +36,7 @@
      */
     if (!function_exists('update')){
         function update(int $id, string $table, array $data):array{
-            $sql    = "UPDATE $table SET ";
+            $sql = "UPDATE $table SET ";
             $set = "";
             
             foreach($data as $fname => $val){
