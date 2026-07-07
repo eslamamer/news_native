@@ -12,13 +12,13 @@
                 foreach(explode('|', $rules) as $rule){
                     if($rule === 'email' &&  !filter_var($value, FILTER_VALIDATE_EMAIL)){
                         $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.email'));
-                    }else if($rule === 'require' && (empty($value) || is_null($value) || (isset($value['tmp_name']) && empty($value['tmp_name'])))){
+                    }elseif($rule === 'require' && (empty($value) || is_null($value) || (isset($value['tmp_name']) && empty($value['tmp_name'])))){
                         $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.require'));
-                    } else if ($rule === 'integer' && filter_var($value, FILTER_VALIDATE_INT) === false) {
+                    }elseif ($rule === 'integer' && filter_var($value, FILTER_VALIDATE_INT) === false) {
                         $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.integer'));
-                    }else if ($rule === 'string' && !is_string($value)) {
+                    }elseif ($rule === 'string' && !is_string($value)) {
                         $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.string'));
-                    }else if ($rule === 'image' && (!empty($value['tmp_name']) && getimagesize($value['tmp_name']) === false)) {
+                    }elseif ($rule === 'image' && (!empty($value['tmp_name']) && getimagesize($value['tmp_name']) === false)) {
                         $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.image'));
                     }elseif(preg_match('/^in/i', $rule)){
                         $ex_rul = explode(':', $rule);
@@ -43,9 +43,25 @@
                         }     
                         $user = search($table , $sql)['query'];
                         if(mysqli_num_rows($user) > 0){
-                            $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.exist'));
+                            $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.uniqe'));
                         }
-                    }
+                    }elseif(preg_match('/^exists/i', $rule)){
+                        $table_ex = explode(':', $rule);
+                        $table_feild = count($table_ex) > 1 ? explode(',', $table_ex[1]) : "";
+                        $table = $table_feild[0];
+                        $sql = "where ";
+                        $feild = "";
+                        if(count($table_feild) > 1 ){
+                            $feild    = isset($table_feild[1]) ? $table_feild[1] : $attr ;
+                            $sql     .= $feild ." = '{$values[$attr]}' ";
+                        }else{
+                            $sql .= 'id' ."= '{$values[$attr]}'";
+                        }   
+                        $news = search($table , $sql)['query'];
+                        if(mysqli_num_rows($news) <= 0){
+                            $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.exist'));
+                       }
+                     }
                 }
                 if(is_array($attr_errors) && count($attr_errors) > 0){
                 $errors[$attr] = $attr_errors;
@@ -55,10 +71,12 @@
                 if($http_header == 'redirect'){
                     session('errors', json_encode($errors));
                     session('old', json_encode($values));
-                    redirect($_SERVER['HTTP_REFERER']);
                 }elseif($http_header == 'api'){
-                    return json_encode($errors, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+                    header('Content-Type: application/json; charset=utf-8');
+                    http_response_code(422);
+                    echo json_encode($errors, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE); 
                 }
+                redirect($_SERVER['HTTP_REFERER']);
             }else{
                     return $values;
             }

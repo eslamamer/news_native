@@ -84,7 +84,7 @@
      * return array
      */
     if(!function_exists('search')){
-        function search(string $table, string $query = "", $col="*"):array{
+        function search(string $table, string $query = "", string $col="*"):array{
             $find =  mysqli_query($GLOBALS['connection'], "select $col from $table $query;");
             $num_of_rows = mysqli_num_rows($find);
             return [

@@ -1,23 +1,21 @@
 <?php $news_list = search('news', 
                     'join categories on news.cat_id = categories.id
-                     join users      on news.user_id= users.id where news.id='.request('id'),
+                     join users      on news.user_id= users.id where news.id='.request('news_id'),
                     'news.id,
                      news.title,
                      news.description,
                      news.content,
                      news.created_at,
                      news.updated_at,
-                     users.id            as userid,
-                     users.name          as auther,
-                     categories.name     as catname,
-                     categories.id       as catid
-                    '
-                    );
+                     users.id          as userid,
+                     users.name        as auther,
+                     categories.name   as catname,
+                     categories.id     as catid');
       $news = mysqli_fetch_assoc($news_list['query']);
       if(empty($news)){
         redirect('/');
       }
-    render('front.layout.header', ['title' => trans('news.'.$news['title'])]);
+      render('front.layout.header', ['title' => trans('news.'.$news['title'])]);
 ?>
 <div class="col-mb-2">
   <div class="col-md-12">

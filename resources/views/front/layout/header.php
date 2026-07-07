@@ -29,10 +29,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <script src="{{url('assets/front/js')}}/color-modes.js"></script>
     <meta name="theme-color" content="#712cf9" />
-    <link
+    <!-- <link
       href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900&display=swap"
       rel="stylesheet"
-    />
+    /> -->
     <link href="{{url('assets/front/css')}}/style.css" rel="stylesheet" />
 
   </head>

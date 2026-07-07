@@ -1,39 +1,4 @@
 // document.addEventListener('submit', async (e) => {
-//   if (!e.target.matches('.add_comment')) return;
-//   e.preventDefault();
-//   const form = document.getElementById('comment_form');
-//   const formData = new FormData(form);
-//   const submitBtn = form.querySelector('.add_comment');
-//   submitBtn.disabled = true;
-//   submitBtn.textContent = 'جارٍ الإرسال...';
-//   const controller = new AbortController();
-//   const timeoutId = setTimeout(() => controller.abort(), 8000);
-//   try {
-//     const response = await fetch(form.action, {
-//       method: 'POST',
-//       body: formData,
-//       signal: controller.signal,
-//     });
-//     clearTimeout(timeoutId);
-//     if (!response.ok) {
-//       throw new Error(`خطأ من السيرفر: ${response.status}`);
-//     }
-//     const data = await response.json();
-//     renderComment(data);
-//   } catch (error) {
-//     if (error.name === 'AbortError') {
-//       showError('استغرق الطلب وقتًا طويلاً، حاول مجددًا');
-//     } else {
-//       showError('تعذّر إرسال التعليق، تحقق من اتصالك');
-//     }
-//     console.error(error);
-//   } finally {
-//     submitBtn.disabled = false;
-//     submitBtn.textContent = 'إرسال التعليق';
-//   }
-// });
-
-// document.addEventListener('submit', async (e) => {
 //     if (!e.target.matches('#comment-form')) return;
 //     e.preventDefault();
 
@@ -101,3 +66,37 @@
 // function showError(message) {
 //     alert(message); // تقدر تستبدلها بأي مكتبة تنبيهات (toast, sweetalert...)
 // }
+$(document).on('click', '.add_comment', function() {
+    var form_data = $("#comment_form").serialize();
+    $.ajax({
+        url     : $('#comment_form').attr('action'),
+        dataType: 'json',
+        type    : 'post',
+        data    : form_data,
+        beforeSend: function() {
+            $('.error_message').html('').addClass('d-none');
+        },
+        success: function(data) {
+            //  console.log(data);
+            if (data.status == true) {
+                location.reload();
+                $('.error_message').html('').addClass('d-none');
+            }
+        },
+        error: function(xhr) {
+            var errors = xhr.responseJSON;
+            if (errors != null) {
+                var error_html = '<ul>';
+                $.each(errors, function(key, val) {
+                    for (i = 0; i < val.length; i++) {
+                        error_html += '<li>' + val[i] + '</li>';
+                    }
+                });
+                error_html += '</ul>';
+                $('.error_message').html(error_html).removeClass('d-none');
+            }
+        }
+    });
+
+    return false;
+});

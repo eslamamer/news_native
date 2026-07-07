@@ -6,6 +6,7 @@
         'string'  => ':attr must be alphabet chars',
         'password'=> ':attr is Invalid',
         'image'   => ':attr shoud be image file',
-        'exist'   => ':attr is exist',
+        'uniqe'   => ':attr is exist',
+        'exist'   => ':attr not exists',
         'user_type' => ':attr input not allawed',
     ];

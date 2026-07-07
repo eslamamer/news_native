@@ -17,5 +17,6 @@
         'submit'         => 'Send',
         'sitname'        => 'news',
         'comment'        => 'Comment',
+        'news_id'        => 'News ID',
         'write_comment'  => 'write your comment',
     ];
