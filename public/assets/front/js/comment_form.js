@@ -1,102 +1,129 @@
-// document.addEventListener('submit', async (e) => {
-//     if (!e.target.matches('#comment-form')) return;
-//     e.preventDefault();
+document.addEventListener('click', async function (e) {
+    if (!e.target.matches('.add_comment')) return;
+    e.preventDefault();
+    const form = e.target.closest('form');
+    const formData = new FormData(form);
+    const errorBox = document.querySelector('.error_message');
+    errorBox.innerHTML = '';
+    errorBox.classList.add('d-none');
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        });
+        const data = await response.json();
+        if (response.ok && data.status === 'success') {
+            location.reload();
+            return;
+        }
+        renderErrors(data);
+    } catch (error) {
+        console.error(error);
+        errorBox.innerHTML = '<ul><li class="text-danger">تعذّر إرسال التعليق، تحقق من اتصالك</li></ul>';
+        errorBox.classList.remove('d-none');
+    }
+});
 
-//     const form = e.target;
-//     const formData = new FormData(form);
-//     const submitBtn = form.querySelector('.add-comment');
+function renderErrors(errors) {
+    const errorBox = document.querySelector('.error_message');
+    let html = '<ul>';
+    for (const key in errors) {
+        errors[key].forEach(msg => {
+            html += `<li class="text-danger">${msg}</li>`;
+        });
+    }
+    html += '</ul>';
+    errorBox.innerHTML = html;
+    errorBox.classList.remove('d-none');
+}
 
-//     submitBtn.disabled = true;
-//     const originalText = submitBtn.textContent;
-//     submitBtn.textContent = 'جارٍ الإرسال...';
 
-//     const controller = new AbortController();
-//     const timeoutId = setTimeout(() => controller.abort(), 8000);
 
-//     try {
-//         const response = await fetch(form.action, {
-//             method: 'POST',
-//             body: formData,
-//             headers: { 'X-Requested-With': 'XMLHttpRequest' },
-//             signal: controller.signal,
-//         });
-//         clearTimeout(timeoutId);
 
-//         if (!response.ok) throw new Error(`خطأ من السيرفر: ${response.status}`);
 
-//         const data = await response.json();
-//         renderComment(data);
-//         form.reset();
-//     } catch (error) {
-//         if (error.name === 'AbortError') {
-//             showError('استغرق الطلب وقتًا طويلاً، حاول مجددًا');
-//         } else {
-//             showError('تعذّر إرسال التعليق، تحقق من اتصالك');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// document.addEventListener('click', function(e) {
+//     if (!e.target.classList.contains('add_comment')) return;
+
+//     var form = document.getElementById('comment_form');
+//     var formData = new FormData(form);
+//     var errorMessage = document.querySelector('.error_message');
+
+//     // beforeSend
+//     errorMessage.innerHTML = '';
+//     errorMessage.classList.add('d-none');
+
+//     fetch(form.getAttribute('action'), {
+//         method: 'POST',
+//         body: new URLSearchParams(formData),
+//         headers: {
+//             'X-Requested-With': 'XMLHttpRequest'
 //         }
-//         console.error(error);
-//     } finally {
-//         submitBtn.disabled = false;
-//         submitBtn.textContent = originalText;
-//     }
+//     })
+//     .then(function(response) {
+//         return response.json().then(function(data) {
+//             return { ok: response.ok, data: data };
+//         });
+//     })
+//     .then(function(result) {
+//         if (result.ok) {
+//             // success
+//             if (result.data.status == true) {
+//                 location.reload();
+//                 errorMessage.innerHTML = '';
+//                 errorMessage.classList.add('d-none');
+//             }
+//         } else {
+//             // error (مثل 422 عند وجود أخطاء تحقق)
+//             showErrors(result.data);
+//         }
+//     })
+//     .catch(function(err) {
+//         console.error('Request failed:', err);
+//     });
+
+//     e.preventDefault();
+//     return false;
 // });
 
-// function renderComment(data) {
-//     const list = document.querySelector('.comments-list');
-//     const html = `
-//         <div class="comment-box">
-//             <div class="d-flex gap-3">
-//                 <img src="https://placehold.co/120/png" alt="User Avatar" class="user-avatar">
-//                 <div class="flex-grow-1">
-//                     <div class="d-flex justify-content-between align-items-center mb-2">
-//                         <h6 class="mb-0">${data.name ?? ''}</h6>
-//                         <span class="comment-time">الآن</span>
-//                     </div>
-//                     <p class="mb-2">${data.comment ?? ''}</p>
-//                     <div class="comment-actions">
-//                         <a href="#"><i class="bi bi-heart"></i> Like</a>
-//                         <a href="#"><i class="bi bi-reply"></i> Reply</a>
-//                         <a href="#"><i class="bi bi-share"></i> Share</a>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>`;
-//     list.insertAdjacentHTML('afterbegin', html);
-// }
-
-// function showError(message) {
-//     alert(message); // تقدر تستبدلها بأي مكتبة تنبيهات (toast, sweetalert...)
-// }
-$(document).on('click', '.add_comment', function() {
-    var form_data = $("#comment_form").serialize();
-    $.ajax({
-        url     : $('#comment_form').attr('action'),
-        dataType: 'json',
-        type    : 'post',
-        data    : form_data,
-        beforeSend: function() {
-            $('.error_message').html('').addClass('d-none');
-        },
-        success: function(data) {
-            //  console.log(data);
-            if (data.status == true) {
-                location.reload();
-                $('.error_message').html('').addClass('d-none');
-            }
-        },
-        error: function(xhr) {
-            var errors = xhr.responseJSON;
-            if (errors != null) {
-                var error_html = '<ul>';
-                $.each(errors, function(key, val) {
-                    for (i = 0; i < val.length; i++) {
-                        error_html += '<li>' + val[i] + '</li>';
-                    }
-                });
-                error_html += '</ul>';
-                $('.error_message').html(error_html).removeClass('d-none');
-            }
-        }
-    });
-
-    return false;
-});
+// function showErrors(errors) {
+//     var errorMessage = document.querySelector('.error_message');
+//     if (errors != null) {
+//         var errorHtml = '<ul>';
+//         for (var key in errors) {
+//             if (errors.hasOwnProperty(key)) {
+//                 errors[key].forEach(function(val) {
+//                     errorHtml += '<li>' + val + '</li>';
+//                 });
+//             }
+//         }
+//         errorHtml += '</ul>';
+//         errorMessage.innerHTML = errorHtml;
+//         errorMessage.classList.remove('d-none');
+//     }
+//  }

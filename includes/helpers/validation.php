@@ -10,6 +10,7 @@
                 
                 $trans_attr = isset($trans[$attr]) ? $trans[$attr]  : $attr;
                 foreach(explode('|', $rules) as $rule){
+                    //var_dump($rule);
                     if($rule === 'email' &&  !filter_var($value, FILTER_VALIDATE_EMAIL)){
                         $attr_errors[]= str_replace(':attr', $trans_attr, trans('validation.email'));
                     }elseif($rule === 'require' && (empty($value) || is_null($value) || (isset($value['tmp_name']) && empty($value['tmp_name'])))){
@@ -32,8 +33,8 @@
                         $table_ex = explode(':', $rule);
                         $table_feild = count($table_ex) > 1 ? explode(',', $table_ex[1]) : "";
                         $table = $table_feild[0];
-                         $sql = "where ";
-                         $feild = "";
+                        $sql = "where ";
+                        $feild = "";
                         if(count($table_feild) > 1 ){
                             $exeption = isset($table_feild[2]) ? "and id!= $table_feild[2]" : "";
                             $feild    = isset($table_feild[1]) ? $table_feild[1] : $attr ;
@@ -71,12 +72,14 @@
                 if($http_header == 'redirect'){
                     session('errors', json_encode($errors));
                     session('old', json_encode($values));
+                    redirect($_SERVER['HTTP_REFERER']);
                 }elseif($http_header == 'api'){
                     header('Content-Type: application/json; charset=utf-8');
                     http_response_code(422);
                     echo json_encode($errors, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE); 
+                    exit;
                 }
-                redirect($_SERVER['HTTP_REFERER']);
+                
             }else{
                     return $values;
             }

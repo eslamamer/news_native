@@ -9,9 +9,8 @@
     </footer>
     <script<?php url('front/dist/js') ?>
       src="{{url('assets/front/dist/js')}}/bootstrap.bundle.min.js"
-      class="astro-vvvwv3sm"
-    ></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      class="astro-vvvwv3sm"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
     <script src="{{url('assets/front/js')}}/comment_form.js"></script>
   </body>
 </html>

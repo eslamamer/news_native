@@ -1,7 +1,8 @@
 <div class="container">
     <div class="comment-section">
         <!-- New Comment Form -->
-        <form id="comment-form" action="{{url('comment/add?news_id='.request('news_id'))}}" method="post">
+         <div class="error_message d-none"></div>
+        <form id="comment_form" action="{{url('comment/add?news_id='.request('news_id'))}}" method="post">
             <div class="mb-4">
                 <input type="hidden" name="_method" value="post">
                 <div class="d-flex gap-3">
@@ -17,16 +18,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- {{all_errors('name')}}
-                {{all_errors('email')}}  
-                {{all_errors('comment')}}
-                {{all_errors('news_id')}} -->
             </div>
         </form>
-        <div class="error_message d-none">
-           
-        </div>
-       
         <!-- Comments List -->
         <div class="comments-list">
             <!-- Comment 1 -->
