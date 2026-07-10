@@ -12,19 +12,12 @@ $data = validate(
         'email'       => trans('main.email'),
         'comment'     => trans('main.comment'),
     ],
-    'api'
-);
-//var_dump($data);
+    'api' );
+
 if (!empty($data)) {
     adding('comments', $data);
-    header('Content-Type: application/json; charset=utf-8');
-    http_response_code(200);
-    echo json_encode(
-        [
+    api([
             'status'  => 'success',
             'message' => 'comment added'
-        ],
-        JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
-    );
+        ]);
 }
-   // redirect($_SERVER['HTTP_REFERER']);

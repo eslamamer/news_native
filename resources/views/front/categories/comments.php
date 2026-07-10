@@ -1,7 +1,10 @@
+<?php
+    $comments = paginate('comments','where status = "show" and news_id = '.request('news_id'), req_append:['news_id' => request('news_id')]);
+?>
 <div class="container">
     <div class="comment-section">
         <!-- New Comment Form -->
-         <div class="error_message d-none"></div>
+        <div class="error_message d-none"></div>
         <form id="comment_form" action="{{url('comment/add?news_id='.request('news_id'))}}" method="post">
             <div class="mb-4">
                 <input type="hidden" name="_method" value="post">
@@ -20,27 +23,30 @@
                 </div>
             </div>
         </form>
+    </div>
         <!-- Comments List -->
-        <div class="comments-list">
-            <!-- Comment 1 -->
-            <div class="comment-box">
-                <div class="d-flex gap-3">
-                    <img src="https://placehold.co/120/png" alt="User Avatar" class="user-avatar">
-                    <div class="flex-grow-1">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h6 class="mb-0">John Doe</h6>
-                            <span class="comment-time">2 hours ago</span>
-                        </div>
-                        <p class="mb-2">This is an amazing post! Thanks for sharing your insights with us. I've
-                            learned a lot from this.</p>
-                        <div class="comment-actions">
-                            <a href="#"><i class="bi bi-heart"></i> Like</a>
-                            <a href="#"><i class="bi bi-reply"></i> Reply</a>
-                            <a href="#"><i class="bi bi-share"></i> Share</a>
-                        </div>
+    <div class="comments-list">
+        <!-- Comment 1 -->
+        <?php while($comment = mysqli_fetch_assoc($comments['data'])):?>
+        <div class="comment-box">
+            <div class="d-flex gap-3">
+                <img src="https://placehold.co/120/png" alt="User Avatar" class="user-avatar">
+                <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h6 class="mb-0">{{$comment['name']}}</h6>
+                        <span class="comment-time">2 hours ago</span>
+                    </div>
+                    <p class="mb-2">{{$comment['comment']}}.</p>
+                    <div class="comment-actions">
+                        <a href="#"><i class="bi bi-heart"></i> Like</a>
+                        <a href="#"><i class="bi bi-reply"></i> Reply</a>
+                        <a href="#"><i class="bi bi-share"></i> Share</a>
                     </div>
                 </div>
             </div>
         </div>
+        <br>
+        <?php endwhile ?>
     </div>
 </div>
+{{$comments['render_pages']}}

@@ -15,6 +15,7 @@ document.addEventListener('click', async function (e) {
         const data = await response.json();
         if (response.ok && data.status === 'success') {
             location.reload();
+            //form.reset();
             return;
         }
         renderErrors(data);
@@ -60,9 +61,16 @@ function renderErrors(errors) {
 
 
 
+////////////////////////////////////////////////////////////////////////////////////
+// بيضيف الكومنت في الصفحة فورًا، قبل حتى ما السيرفر يرد
+// prependComment(tempComment);
+// form.reset();
 
-
-
+// const response = await fetch(...);
+// if (!response.ok) {
+//     removeComment(tempComment); // لو فشل، يشيله تاني
+// }
+////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -93,8 +101,13 @@ function renderErrors(errors) {
 //     .then(function(result) {
 //         if (result.ok) {
 //             // success
-//             if (result.data.status == true) {
-//                 location.reload();
+//             // if (result.data.status == 'success') {
+//             //     location.reload();
+//             //     errorMessage.innerHTML = '';
+//             //     errorMessage.classList.add('d-none');
+//             if (result.data.status === 'success') {
+//                 form.reset();                        // يمسح الفورم من غير ما يعمل reload لكل الصفحة
+//                 addCommentToList(result.data);       // تضيف الكومنت للقائمة مباشرة (لو الـ response بيرجّع بيانات الكومنت كاملة)
 //                 errorMessage.innerHTML = '';
 //                 errorMessage.classList.add('d-none');
 //             }

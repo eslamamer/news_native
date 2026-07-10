@@ -31,7 +31,7 @@
         <div class="mb-1 text-body-secondary"><?= $news['updated_at']?></div>
         <p class="card-text mb-auto"><?= $news['description']?></p>
         <a
-          href="<?= url('news?cat_id='.request('cat_id').'&&news_id='.$news['id'])?>"
+          href="<?= url('news?cat_id='.request('cat_id').'&news_id='.$news['id'])?>"
           class="icon-link gap-1 icon-link-hover stretched-link">
           <?= trans('news.more')?>
           <svg class="bi" aria-hidden="true">

@@ -120,7 +120,7 @@
      * return array ["query", "total_pages"] keys
      */
     if(!function_exists('paginate')){
-        function paginate(string $table, string $where = "",string $col = "*", int $limit=3){
+        function paginate(string $table, string $where = "",string $col = "*", int $limit=3, array $req_append = []){
             $count_query = mysqli_query($GLOBALS['connection'],"select count($table.id) from $table $where;");
             $count = mysqli_fetch_assoc($count_query);
             $data_count = $count["count($table.id)"];
@@ -139,7 +139,7 @@
             $num_rows = mysqli_num_rows($query);
             return [
                 'data'=>$query,
-                'render_pages'=>render_paginate($total_pages),
+                'render_pages'=>render_paginate($total_pages, $req_append),
                 'num_rows'=>$num_rows,
                 'current_page'=>$current_page
                 ];
@@ -152,13 +152,18 @@
      * return string
      */
     if(!function_exists('render_paginate')){
-        function render_paginate(int $total_pages):string{
+        function render_paginate(int $total_pages, array $req_append):string{
+            $appends = '';
+            foreach($req_append as $name => $val){
+                $appends .= $name.'='.$val.'&';
+            }
+            $appends .='page=';
             $render= "<ul class='pagination justify-content-center'>";
             if($total_pages > 0){
                 for($i=1;$i<=$total_pages;$i++){
-                    $active = !is_null(request('page')) && request('page') == $i ? 'active' : "";
-                    $render.= "<li class='page-item '><a class='page-link $active' href=?page=$i> $i</a></li>";
-                }
+                    $active = (!empty(request('page')) && request('page') == $i) ||( $i == 1 && empty(request('page'))) ? 'active' : "";
+                    $render.= "<li class='page-item '><a class='page-link $active' href=?$appends$i> $i</a></li>";
+                    }
                 $render.= "</ul>";
             }
             return $render;

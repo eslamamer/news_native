@@ -74,9 +74,7 @@
                     session('old', json_encode($values));
                     redirect($_SERVER['HTTP_REFERER']);
                 }elseif($http_header == 'api'){
-                    header('Content-Type: application/json; charset=utf-8');
-                    http_response_code(422);
-                    echo json_encode($errors, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE); 
+                    echo api($errors, 422); 
                     exit;
                 }
                 
