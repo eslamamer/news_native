@@ -21,6 +21,15 @@ rout_post(ADMIN.'/categories/create', 'controller.admin.categories.create');
 rout_post(ADMIN.'/categories/update', 'controller.admin.categories.update');
 rout_post(ADMIN.'/categories/delete', 'controller.admin.categories.delete');
 
+//admin categories routes
+rout_get(ADMIN.'/comments'         , 'admin.comments.index'  );
+rout_get(ADMIN.'/comments/comment' , 'admin.comments.comment');
+rout_get(ADMIN.'/comments/edit'    , 'admin.comments.edit'   );
+
+//admin comments CRUD routes
+rout_post(ADMIN.'/comments/update', 'controller.admin.comments.update');
+rout_post(ADMIN.'/comments/delete', 'controller.admin.comments.delete');
+
 //admin news routes
 rout_get(ADMIN.'/news'         , 'admin.news.index');
 rout_get(ADMIN.'/news/create'  , 'admin.news.create');

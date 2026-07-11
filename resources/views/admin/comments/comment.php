@@ -1,0 +1,47 @@
+<?php 
+    render('admin.layouts.header', ['title' => trans('comment.comments')]);
+    $comment = fetch(intval(request('id')), 'comments');
+    if(empty($comment)){
+        redirect(aurl('comments'));
+    }
+?>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2>{{trans('comment.comments')}} - {{trans('comment.comment'); echo " ".trans('comment.'.$comment['name'])}}</h2>
+        <a class="btn btn-info" href="{{aurl('comments')}}">{{trans('comment.comments')}}</a>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="name">{{trans('comment.name')}}</label>
+                <h3>{{$comment['name']}}</h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="email">{{trans('comment.email')}}</label>
+                <h3>{{$comment['email']}}</h3>
+            </div>
+        </div>
+         <div class="col-md-6">
+            <div class="form-group">
+                <label for="news">{{trans('comment.news')}}</label>
+                <h3>{{$comment['news_id']}}</h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="status">{{trans('comment.status')}}</label>
+                <h3>{{$comment['status']}}</h3>
+            </div>
+        </div>
+       
+    </div>
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="description">{{trans('comment.comment')}}</label>
+            <p>{{$comment['comment']}}</p>
+        </div>
+    </div>
+</main>
+<?php render('admin.layouts.footer'); ?>

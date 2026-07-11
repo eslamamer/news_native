@@ -16,7 +16,7 @@ $data = validate(
 
 if (!empty($data)) {
     adding('comments', $data);
-    api([
+    echo api([
             'status'  => 'success',
             'message' => 'comment added'
         ]);

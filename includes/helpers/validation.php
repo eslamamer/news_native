@@ -33,7 +33,7 @@
                         $table_ex = explode(':', $rule);
                         $table_feild = count($table_ex) > 1 ? explode(',', $table_ex[1]) : "";
                         $table = $table_feild[0];
-                        $sql = "where ";
+                        $sql   = "where ";
                         $feild = "";
                         if(count($table_feild) > 1 ){
                             $exeption = isset($table_feild[2]) ? "and id!= $table_feild[2]" : "";

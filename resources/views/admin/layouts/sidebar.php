@@ -55,6 +55,12 @@
                     {{trans('users.users')}}
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link d-flex align-items-center gap-2" href="{{aurl('comments')}}">
+                    <i class="fa fa-users"></i>
+                    {{trans('comments.comment')}}
+                  </a>
+                </li>
               </ul>
               <hr class="my-3" />
               <ul class="nav flex-column mb-auto">
